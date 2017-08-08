@@ -1,5 +1,13 @@
 package main
 
+import (
+	"net/http"
+)
+
 func main() {
-	print("Hello, world!")
+
+	addHandler := AddUrlHandler{}
+	http.Handle("/add", addHandler)
+	print("Starting server")
+	http.ListenAndServe(":8080", nil)
 }
