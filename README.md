@@ -28,17 +28,17 @@ You can use curl to easily add a URL from command line like so.
 curl -X POST http://localhost:8080/ -H "Accept: application/json" -d '{"url":"http://github.com"}'
 ```
 
-The JSON payload in response will containing a JSON attribute called `id` that you'll use for your short url.
+The JSON payload in response will containing a JSON attribute called `key` that you'll use for your short url.
 
 ```json
 {
-  "id": "a"
+  "key": "a"
 }
 ```
 
 ## Redirect to a URL
 
-Just call the root like so using the `id` you received when submitting the URL.
+Just call the root like so using the `key` you received when submitting the URL.
 
 ```bash
 curl -I -X GET http://localhost:8080/a

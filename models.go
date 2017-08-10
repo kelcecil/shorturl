@@ -10,13 +10,13 @@ type AddRequest struct {
 // when marshaling a response after adding
 // a URL
 type AddResponse struct {
-	ID string `json:"id"`
+	Key string `json:"key"`
 }
 
 // MakeAddResponse is a convenience method to
 // create the AddResponse model.
-func MakeAddResponse(ID string) AddResponse {
+func MakeAddResponse(key string) AddResponse {
 	return AddResponse{
-		ID: ID,
+		Key: key,
 	}
 }
