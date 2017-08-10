@@ -4,13 +4,13 @@ import "testing"
 
 func TestAddURLToMap(t *testing.T) {
 	storage := MakeMapURLStorage()
-	values := map[string]string{
-		"one":   "one",
-		"two":   "two",
-		"three": "three",
+	values := map[int]string{
+		0: "one",
+		1: "two",
+		2: "three",
 	}
-	for k, v := range values {
-		if err := storage.Add(k, v); err != nil {
+	for _, v := range values {
+		if _, err := storage.Add(v); err != nil {
 			t.Fatalf("Failed during adding values. %s", err.Error())
 		}
 	}
@@ -27,34 +27,34 @@ func TestAddURLToMap(t *testing.T) {
 
 func TestDeleteURLFromMap(t *testing.T) {
 	storage := MakeMapURLStorage()
-	values := map[string]string{
-		"one": "one",
-		"two": "two",
+	values := map[int]string{
+		0: "one",
+		1: "two",
 	}
-	for k, v := range values {
-		if err := storage.Add(k, v); err != nil {
+	for _, v := range values {
+		if _, err := storage.Add(v); err != nil {
 			t.Fatalf("Failed during adding values. %s", err.Error())
 		}
 	}
-	storage.Delete("one")
+	storage.Delete(0)
 
-	if _, ok := storage.storage["one"]; ok {
+	if _, ok := storage.storage[0]; ok {
 		t.Fatal("The key 'one' was not removed")
 	}
-	if _, ok := storage.storage["two"]; !ok {
+	if _, ok := storage.storage[1]; !ok {
 		t.Fatal("The key 'two' should not have been removed")
 	}
 }
 
 func TestGetValuesFromMapStorage(t *testing.T) {
 	storage := MakeMapURLStorage()
-	values := map[string]string{
-		"one":   "one",
-		"two":   "two",
-		"three": "three",
+	values := map[int]string{
+		0: "one",
+		1: "two",
+		2: "three",
 	}
-	for k, v := range values {
-		if err := storage.Add(k, v); err != nil {
+	for _, v := range values {
+		if _, err := storage.Add(v); err != nil {
 			t.Fatalf("Failed during adding values. %s", err.Error())
 		}
 	}

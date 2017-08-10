@@ -8,36 +8,41 @@ import (
 // MapURLStorage uses a standard Go map to
 // store the URL.
 type MapURLStorage struct {
-	storage map[string]string
-	lock    sync.RWMutex
+	storage           map[int]string
+	lock              sync.RWMutex
+	currentIdentifier int
 }
 
 func MakeMapURLStorage() *MapURLStorage {
 	return &MapURLStorage{
-		storage: make(map[string]string),
-		lock:    sync.RWMutex{},
+		storage:           make(map[int]string),
+		lock:              sync.RWMutex{},
+		currentIdentifier: 0,
 	}
 }
 
-func (s *MapURLStorage) Add(identifier, url string) error {
+func (s *MapURLStorage) Add(url string) (int, error) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
 
+	identifier := s.currentIdentifier
+
 	if _, exists := s.storage[identifier]; !exists {
 		s.storage[identifier] = url
-		return nil
+		s.currentIdentifier = s.currentIdentifier + 1
+		return identifier, nil
 	}
-	return errors.New("Identifier already exists")
+	return 0, errors.New("Identifier already exists")
 }
 
-func (s *MapURLStorage) Delete(identifier string) error {
+func (s *MapURLStorage) Delete(identifier int) error {
 	s.lock.Lock()
 	delete(s.storage, identifier)
 	s.lock.Unlock()
 	return nil
 }
 
-func (s *MapURLStorage) Get(identifier string) (string, error) {
+func (s *MapURLStorage) Get(identifier int) (string, error) {
 	s.lock.RLock()
 	defer s.lock.RUnlock()
 
