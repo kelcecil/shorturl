@@ -1,16 +1,12 @@
 package main
 
 import (
-	"io"
-	"net/http"
-
-	"io/ioutil"
-
-	"log"
-
-	"fmt"
-
 	"encoding/json"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"log"
+	"net/http"
 
 	"github.com/kelcecil/shorturl/encoding"
 	"github.com/kelcecil/shorturl/storage"
