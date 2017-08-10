@@ -62,6 +62,7 @@ This example is intended to lead into a workshop session where people try runnin
 to try their hand at Go programming. A few possibilities (in ascending order of difficulty) are:
 
 - Adding more logging. ([Explore the `log` standard library package.](https://golang.org/pkg/log/))
+- Add a flag to configure the port to listen on. ([Explore the `flag` standard library package.](https://golang.org/pkg/flag/))
 - Add tests to test the HTTP endpoints. ([Explore the `httptest` standard library package.](https://golang.org/pkg/net/http/httptest/))
 - Add benchmarks to evaluate the speed of the encoding. ([Explore the `testing` standard library package.](https://golang.org/pkg/testing/))
 - Write code to ensure that the symmetric key will never produce a curse word. (Think http://localhost:8080/butts)
